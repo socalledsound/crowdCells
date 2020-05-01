@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+
+        html {
+            height: 100%;
+        }
+        body{
+            height: 100%;
+            margin: 0;
+            background-image: linear-gradient(to left bottom, rgb(97, 22, 197), rgb(189, 38, 19), rgb(189, 138, 19));
+            background-repeat: no-repeat;
+        }
+        div{
+            -webkit-transition: rotate 0.5s ease-in-out;
+       -moz-transition: rotate 0.5s ease-in-out;
+       -o-transition: rotate 0.5s ease-in-out;
+       transition: rotate 0.5s ease-in-out;
+       
+
+        }
+
+        .container {
+            width: 90vw;
+            height: 40vh;
+            padding: 50px;
+            margin-top:100px;
+            /* margin: .1vw; */
+            }
+
+        .organism{
+            border: 2px solid rgba(255, 140, 0, 0.228);
+        }
+    </style>
+
+    <title>crowd balls</title>
+</head>
+<body onload="init()">
+
+    <div class="container">
+        <div class="sibling"></div>
+    </div>
+
+
+
+    <script src="index.js"></script>
+</body>
+</html>
