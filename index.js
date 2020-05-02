@@ -1,14 +1,7 @@
 let organisms = [];
 let numOrganisms = 300;
-// let images = [
-//     'img/1s.jpg',
-//     'img/color-crowd1.jpg',
-//     'img/crowd.jpg',
-//     'img/crowd2.jpg',
-//     'img/crowd3.jpg',
-//     'img/crowd4.jpg',
-//     'img/royals.jpg',
-// ];
+let totalNumImages = 77;
+let totalNumSounds = 5;
 
 function init(){
     
@@ -31,7 +24,9 @@ function mainLoop(){
 
 function Organism(index){
     this.index = index;
-    this.totalNumImages = 77;
+
+    this.soundNum = this.index%totalNumSounds;
+    this.sound = new Howl({ src: `sounds/${this.soundNum}.mp3`, html5: false, volume:0.01, loop: true});
     this.container = document.querySelector('.container');
     this.container.style = getComputedStyle(this.container);
     console.log("margin" + this.container.style.content);
@@ -62,6 +57,7 @@ function Organism(index){
     this.clicked = false;
     this.mouseOver = false;
     this.makingBigger=true;
+    this.playing = false;
 
     
     this.init=function(){
@@ -72,14 +68,19 @@ function Organism(index){
             this.mouseOver = false;
             this.el.style.opacity = ".1";
             this.el.style.filter="blur(3px) brightness(80%)";   
-            
+            if(this.clicked){
+                this.sound.volume(0.05);
+            }
             
         });
 
         this.el.addEventListener("mouseenter", (e)=>{
             this.mouseOver = true;
             this.el.style.opacity = ".6";
-            this.el.style.filter="blur(0px) brightness(100%)";   
+            this.el.style.filter="blur(0px) brightness(100%)"; 
+            if(this.clicked){
+                this.sound.volume(0.5);
+            }  
        });
 
         this.el.addEventListener("click", (e)=>{
@@ -87,13 +88,16 @@ function Organism(index){
             this.el.style.backgroundColor = "rgba(190,45,170,0.1)";
             this.el.style.border = "10px solid rgba(190,45,170,0.8)";
             this.el.style.opacity = ".8";
-            if(!this.clicked){
+            
+            if(!this.playing){
                 this.clicked = true;
                 // this.img=images[Math.floor(Math.random()*images.length)];
                 setTimeout(this.blur, 2000);
+                this.id1 = this.sound.stop();
             } else {
                 
-                this.clicked = false
+                this.clicked = false;
+                this.id1 = this.sound.play();
             }
 
             // this.el.style.backgroundColor = "purple";
@@ -112,33 +116,34 @@ function Organism(index){
         if(this.x > this.xMax + this.xMin - this.size + this.safety){
             // this.img=imageList[Math.floor(Math.random()*imageList.length)];
             // this.img = "1.jpg";
-            this.img = `${this.index%this.totalNumImages}.jpg`
+            this.img = `${this.index%totalNumImages}.jpg`
             // this.img=`${Math.floor(Math.random()*this.totalNumImages)}.jpg`;
             // this.img=`${Math.floor(Math.random()*this.totalNumImages)}.jpg`;
             this.el.style.filter="blur(0px) brightness(100%)"; 
             this.makeBigger();
+
+            if(!this.playing){
+                this.playing = true;
+                this.sound.play();
+            }
         }
         if(this.x < 0 + this.xMin){
             this.makeSmaller();
+            if(this.playing){
+                this.playing = false;
+                this.sound.stop();
+            
+            }
         }
-        
         if(this.x > this.xMax + this.xMin - this.size + this.safety || this.x < 0 + this.xMin){
-            this.clicked = true;
-            // if(!this.makingBigger){
-            //     this.makeBigger();
-            // }
-           
-
             this.xSpeed*=-1;
+            setTimeout(this.blur, 2000);
             if(this.clicked){
-                setTimeout(this.blur, 2000);
+                
             }
         }
         if(this.y > this.yMax + this.yMin - this.size + this.safety || this.y < 0 + this.yMin){
-            this.clicked = true;
-            // if(!this.makingBigger){
-            //     this.makeBigger();
-            // }
+
             
             // this.img=images[Math.floor(Math.random()*images.length)];
             // this.el.style.filter="blur(0px) brightness(100%)"; 
@@ -148,9 +153,12 @@ function Organism(index){
             // }
             
         }
-        this.x+=this.xSpeed;
-        this.y+=this.ySpeed;
-        this.rotate+=this.rotateSpeed;
+        if(!this.mouseOver){
+            this.x+=this.xSpeed;
+            this.y+=this.ySpeed;
+            this.rotate+=this.rotateSpeed
+        }
+;
     }
 
     this.display = function(){
