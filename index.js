@@ -58,18 +58,20 @@ function Organism(index){
     this.mouseOver = false;
     this.makingBigger=true;
     this.playing = false;
+    this.sound.volume(0);
 
     
     this.init=function(){
-        console.log(this.xMax);
+        this.sound.fade(0.0, 0.01, 2000);
         this.el=document.createElement('div');
         this.el.className = "organism";
         this.el.addEventListener("mouseout", (e)=>{
             this.mouseOver = false;
             this.el.style.opacity = ".1";
             this.el.style.filter="blur(3px) brightness(80%)";   
+            this.sound.fade(0.5, 0.01, 1000);
             if(this.clicked){
-                this.sound.volume(0.05);
+                this.sound.volume(0.01);
             }
             
         });
@@ -78,27 +80,26 @@ function Organism(index){
             this.mouseOver = true;
             this.el.style.opacity = ".6";
             this.el.style.filter="blur(0px) brightness(100%)"; 
+            this.sound.volume(0.5);
             if(this.clicked){
                 this.sound.volume(0.5);
             }  
        });
 
         this.el.addEventListener("click", (e)=>{
-            this.img='x.jpg';
-            this.el.style.backgroundColor = "rgba(190,45,170,0.1)";
-            this.el.style.border = "10px solid rgba(190,45,170,0.8)";
-            this.el.style.opacity = ".8";
+            this.coverScreen();
             
-            if(!this.playing){
-                this.clicked = true;
-                // this.img=images[Math.floor(Math.random()*images.length)];
-                setTimeout(this.blur, 2000);
-                this.id1 = this.sound.stop();
-            } else {
+            
+            // if(!this.playing){
+            //     this.clicked = true;
+            //     // this.img=images[Math.floor(Math.random()*images.length)];
+            //     setTimeout(this.blur, 2000);
+            //     this.id1 = this.sound.stop();
+            // } else {
                 
-                this.clicked = false;
-                this.id1 = this.sound.play();
-            }
+            //     this.clicked = false;
+            //     this.id1 = this.sound.play();
+            // }
 
             // this.el.style.backgroundColor = "purple";
             
@@ -197,9 +198,28 @@ function Organism(index){
         this.width = this.initSize;
     }.bind(this);
 
+
+    this.coverScreen  = function(){
+        if(this.width < 1600){
+
+            this.height+=3;
+            this.width+=3;
+            setTimeout(this.coverScreen, 100);
+        } else {
+            startPartTwo();
+        }
+    }.bind(this)
+
+
     // this.addSize = function(){
     //     this.height+=this.sizeDifferential/10;
     //     this.width+=this.sizeDifferential/10;
     // }.bind(this);
 
+}
+
+
+function startPartTwo(){
+    organisms = [];
+    document.body.backgroundImage = "url('img/white.jpg')";
 }
