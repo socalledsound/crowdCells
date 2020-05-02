@@ -2,6 +2,19 @@ let organisms = [];
 let numOrganisms = 300;
 let totalNumImages = 77;
 let totalNumSounds = 5;
+let touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
+
+
+document.addEventListener('touchstart', this.touchstart);
+document.addEventListener('touchmove', this.touchmove);
+function touchstart(e) {
+    e.preventDefault()
+}
+
+function touchmove(e) {
+    e.preventDefault()
+}
+
 
 function init(){
     
