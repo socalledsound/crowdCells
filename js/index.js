@@ -4,6 +4,7 @@ let cellCount = 0;
 let cellMultiplier  = 5;
 let totalNumImages = 77;
 let totalNumSounds = 21;
+let arrowIsShowing = false;
 let touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
 
 
@@ -36,7 +37,6 @@ async function preload(){
 function init(){
 
     let numcells = Math.floor(Math.random()*10) + 3;
-    console.log(numcells);
     let stopLoop = cellCount + numcells;
     for(let i = cellCount; i < stopLoop; i++){
         
@@ -65,13 +65,18 @@ function addCells(){
 
 
 function mainLoop(){
-    console.log(cells.length);
     if(Math.random() > 0.99 && cellCount < totalcells){
         addCells();
     }
     cells.forEach(cell=>cell.checkEdges());
     cells.forEach(cell=>cell.move());
     cells.forEach(cell=>cell.display());
+    cells.forEach((cell)=>{
+        if(cell.completed && !arrowIsShowing){
+            // window.location('next.html');
+            showArrow();
+        }
+    })
     window.requestAnimationFrame(mainLoop);
 }
 
@@ -80,4 +85,10 @@ function mainLoop(){
 function startPartTwo(){
     cells = [];
     document.body.backgroundImage = "url('img/white.jpg')";
+}
+
+function showArrow(){
+    arrowIsShowing = true;
+    console.log('triggered');
+
 }
