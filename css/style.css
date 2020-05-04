@@ -17,8 +17,8 @@
             justify-content: center;
         }
         h1 {
-            font-size: 80px;
-            width: 150px;
+            font-size: 60px;
+            width: 25vw;
             color: white;
         }
 
@@ -51,6 +51,7 @@
         }
 
         .btn-div {
+            margin-left: -20px;
             display: flex;
             justify-content: center;
             /* margin-top:5vh; */
