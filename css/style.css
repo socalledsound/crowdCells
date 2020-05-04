@@ -53,7 +53,7 @@
             display: flex;
             justify-content: center;
             margin-top:25vh;
-            transition: all .2s;
+            transition: all 2s;
         }
 
         /* .btn-inside {
@@ -73,8 +73,8 @@
         .btn-inner {
             font-family: 'Bebas Neue', sans-serif;
             position: absolute;
-            left:32px;
-            top:40px;
+            left:22px;
+            top:22px;
             /* font-family: 'Times New Roman', Times, serif; */
             font-size: 30px;
             font-weight: 800;
@@ -86,14 +86,15 @@
         .btn-start {
             /* transform: translateX(-100px); */
             position: relative;
-            height:15vh;
-            width:15vh;
+            height:90px;
+            width:90px;
             padding: 1rem 2rem;
             display:inline-block;
             border-radius:90px;
             /* margin-top:35vh; */
 
             
+            border: 6px solid #4D2600;
             border: 6px solid #4D2600;
             background-color:  #BFE600;
             background-color: #FF5500;
