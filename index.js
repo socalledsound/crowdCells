@@ -19,6 +19,7 @@ function touchmove(e) {
 
 async function preload(){
     document.querySelector('.btn-start').remove();
+    document.querySelector('h1').remove();
     mainSound = new Howl({ src: `sounds/mainloop.mp3`, html5: false, volume:0.4, loop: true});
     
     mainSound.once('load', function(){
