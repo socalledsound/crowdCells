@@ -269,6 +269,11 @@ function Organism(index){
 
 
     this.coverScreen  = function(){
+        
+        if(this.height > this.targetSize*2){
+            this.blur;
+            this.el.style.zIndex="-1";
+        }
         if(this.height < this.yMax){
             this.el.style.zIndex="-1";
             this.height+=10;
