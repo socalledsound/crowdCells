@@ -92,7 +92,7 @@ function Organism(index){
     this.safety = window.innerWidth*.1;
     this.xMax = this.container.offsetWidth - this.safety - this.targetSize/2;
     // console.log("xMax:" + this.xMax);
-    this.yMax = window.innerHeight - this.safety - 100;
+    this.yMax = window.innerHeight - this.safety - 200;
      console.log("yMax:" + this.yMax);
     this.x=Math.random() * this.xMax - this.size + this.xMin - this.safety;
     // this.y=Math.random() * this.yMax - this.size + this.yMin - this.safety;
@@ -133,7 +133,7 @@ function Organism(index){
             this.mouseOver = true;
             this.el.style.opacity = ".6";
             this.el.style.filter="blur(0px) brightness(100%)"; 
-            this.sound.volume(0.4);
+            this.sound.volume(0.5);
             if(this.clicked){
                 this.sound.volume(0.4);
             }  
@@ -273,8 +273,8 @@ function Organism(index){
             this.el.style.zIndex="-1";
             this.height+=10;
             this.width+=10;
-            this.y-=this.height/40;
-            this.x-=this.width/40;
+            this.y-=this.height/100;
+            this.x-=this.width/100;
              setTimeout(this.coverScreen, 100);
         } else {
             // startPartTwo();
