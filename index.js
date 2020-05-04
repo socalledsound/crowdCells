@@ -1,5 +1,7 @@
 let organisms = [];
-let numOrganisms = 300;
+let totalOrganisms = 300;
+let organismCount = 0;
+let organismMultiplier  = 5;
 let totalNumImages = 77;
 let totalNumSounds = 5;
 let touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
@@ -15,21 +17,52 @@ function touchmove(e) {
     e.preventDefault()
 }
 
+function preload(){
+    mainSound = new Howl({ src: `sounds/mainloop.mp3`, html5: false, volume:0.4, loop: true});
+    mainSound.play();
+
+    setTimeout(init, 3000);
+}
+
+
 
 function init(){
-    
-    for(let i = 0; i < numOrganisms; i++){
+
+    let numOrganisms = Math.floor(Math.random()*10) + 3;
+    console.log(numOrganisms);
+    let stopLoop = organismCount + numOrganisms;
+    for(let i = organismCount; i < stopLoop; i++){
+        
         organisms[i] = new Organism(i);
         organisms[i].init();
         organisms[i].display();
+        organismCount+=1;
     }
 
 
     mainLoop();
 }
 
+function addOrganisms(){
+    let numOrganisms = Math.floor(Math.random() * organismMultiplier) + 3;
+    let stopLoop = organismCount + numOrganisms;
+    for(let i = organismCount; i < stopLoop; i++){
+        organisms[i] = new Organism(i);
+        organisms[i].init();
+        organisms[i].display();
+        organismCount++
+    }
+    organismMultiplier+=2;
+}
+
+
+
 function mainLoop(){
-    
+    console.log(organisms.length);
+    if(Math.random() > 0.99 && organismCount < totalOrganisms){
+        addOrganisms();
+    }
+
     organisms.forEach(organism=>organism.move());
     organisms.forEach(organism=>organism.display());
     window.requestAnimationFrame(mainLoop);
@@ -195,7 +228,7 @@ function Organism(index){
 
     this.blur = function(){
         
-        let blurVal = Math.random()*10 + 0.5;
+        let blurVal = Math.random()*10 + 2;
         // this.el.style.opacity = `${this.oscillatingOpacity}`;
         this.el.style.filter=`blur(${blurVal}px) brightness(80%)`;
 

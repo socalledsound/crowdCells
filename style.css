@@ -1,0 +1,44 @@
+
+        html {
+            height: 100%;
+        }
+        body{
+            font-family: 'Bebas Neue', sans-serif;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            background-image: linear-gradient(to left bottom, rgb(97, 22, 197), rgb(189, 38, 19), rgb(189, 138, 19));
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .header-div {
+            display: flex;
+            justify-content: center;
+        }
+        h1 {
+            e;
+            color: white;
+        }
+
+
+        div{
+            -webkit-transition: rotate 0.5s ease-in-out;
+       -moz-transition: rotate 0.5s ease-in-out;
+       -o-transition: rotate 0.5s ease-in-out;
+       transition: rotate 0.5s ease-in-out;
+       
+
+        }
+
+        .container {
+            width: 90vw;
+            height: 40vh;
+            padding: 50px;
+            margin-top:100px;
+            /* margin: .1vw; */
+            }
+
+        .organism{
+            border: 2px solid rgba(255, 140, 0, 0.228);
+        }
