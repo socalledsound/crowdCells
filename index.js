@@ -3,7 +3,7 @@ let totalOrganisms = 300;
 let organismCount = 0;
 let organismMultiplier  = 5;
 let totalNumImages = 77;
-let totalNumSounds = 5;
+let totalNumSounds = 20;
 let touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
 
 
@@ -77,7 +77,7 @@ function Organism(index){
     this.index = index;
 
     this.soundNum = this.index%totalNumSounds;
-    this.sound = new Howl({ src: `sounds/${this.soundNum}.mp3`, html5: false, volume:0.01, loop: true});
+    this.sound = new Howl({ src: `sounds/${this.soundNum}.mp3`, html5: false, volume:0, loop: true});
     this.container = document.querySelector('.container');
     this.container.style = getComputedStyle(this.container);
     console.log("margin" + this.container.style.content);
@@ -113,16 +113,16 @@ function Organism(index){
 
     
     this.init=function(){
-        this.sound.fade(0.0, 0.01, 2000);
+        this.sound.fade(0.0, 0.05, 2000);
         this.el=document.createElement('div');
         this.el.className = "organism";
         this.el.addEventListener("mouseout", (e)=>{
             this.mouseOver = false;
             this.el.style.opacity = ".1";
             this.el.style.filter="blur(3px) brightness(80%)";   
-            this.sound.fade(0.5, 0.01, 1000);
+            this.sound.fade(0.3, 0.05, 1000);
             if(this.clicked){
-                this.sound.volume(0.01);
+                this.sound.volume(0.3);
             }
             
         });
@@ -131,9 +131,9 @@ function Organism(index){
             this.mouseOver = true;
             this.el.style.opacity = ".6";
             this.el.style.filter="blur(0px) brightness(100%)"; 
-            this.sound.volume(0.5);
+            this.sound.volume(0.4);
             if(this.clicked){
-                this.sound.volume(0.5);
+                this.sound.volume(0.4);
             }  
        });
 
@@ -251,13 +251,13 @@ function Organism(index){
 
 
     this.coverScreen  = function(){
-        if(this.width < 1600){
-
+        if(this.width < 3200){
+            this.el.style.zIndex="-1";
             this.height+=10;
             this.width+=10;
-            setTimeout(this.coverScreen, 100);
+             setTimeout(this.coverScreen, 100);
         } else {
-            startPartTwo();
+            // startPartTwo();
         }
     }.bind(this)
 
