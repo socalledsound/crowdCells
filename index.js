@@ -207,7 +207,7 @@ function Organism(index){
                 
             // }
         }
-        if(this.y > 600 || this.y < 100){
+        if(this.y + this.height/2 > this.yMax || this.y < 100){
             this.ySpeed*=-1;
         }
         
