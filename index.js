@@ -88,8 +88,8 @@ function Organism(index){
     this.size = this.initSize;
     this.xMin = window.innerWidth*.001;
     this.yMin = window.innerWidth*.001+this.marginTop;
-    this.safety = window.innerWidth*.1 + this.size/3;
-    this.xMax = this.container.offsetWidth - this.safety;
+    this.safety = window.innerWidth*.1;
+    this.xMax = this.container.offsetWidth - this.safety-this.targetSize/2;
     // console.log("xMax:" + this.xMax);
     this.yMax = this.container.offsetHeight - this.safety;
     // console.log("yMax:" + this.yMax);
@@ -165,14 +165,14 @@ function Organism(index){
 
     this.move= function(){
 
-        if(this.x > this.xMax + this.xMin - this.size + this.safety){
+        if(this.x > this.xMax + this.xMin - this.safety ){
             // this.img=imageList[Math.floor(Math.random()*imageList.length)];
             // this.img = "1.jpg";
             this.img = `${this.index%totalNumImages}.jpg`
             // this.img=`${Math.floor(Math.random()*this.totalNumImages)}.jpg`;
             // this.img=`${Math.floor(Math.random()*this.totalNumImages)}.jpg`;
-            this.el.style.filter="blur(0px) brightness(100%)"; 
-            this.makeBigger();
+            // this.el.style.filter="blur(0px) brightness(100%)"; 
+            setTimeout(this.makeBigger, 100);
 
             if(!this.playing){
                 this.playing = true;
@@ -187,7 +187,7 @@ function Organism(index){
             
             }
         }
-        if(this.x > this.xMax + this.xMin - this.size + this.safety || this.x < 0 + this.xMin){
+        if(this.x > this.xMax + this.xMin - this.safety || this.x < 0 + this.xMin){
             this.xSpeed*=-1;
             setTimeout(this.blur, 2000);
             if(this.clicked){
@@ -240,7 +240,9 @@ function Organism(index){
     }.bind(this)
 
     this.makeBigger = function(){
+         this.x-=(this.targetSize-this.height);
         this.height = this.targetSize;
+        
         this.width = this.targetSize;
     }.bind(this);
 
