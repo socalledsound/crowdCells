@@ -17,11 +17,16 @@ function touchmove(e) {
     e.preventDefault()
 }
 
-function preload(){
+async function preload(){
     mainSound = new Howl({ src: `sounds/mainloop.mp3`, html5: false, volume:0.4, loop: true});
-    mainSound.play();
+    
+    mainSound.once('load', function(){
+        mainSound.play();
+        setTimeout(init, 3000);
+      });
+    
 
-    setTimeout(init, 3000);
+    
 }
 
 
@@ -92,8 +97,8 @@ function Organism(index){
     this.y=Math.random() * this.yMax - this.size + this.yMin + this.safety;
     this.height=this.size;
     this.width=this.size;
-    this.xSpeed=Math.random()*5;
-    this.ySpeed=Math.random()*-3;
+    this.xSpeed=Math.random()*3;
+    this.ySpeed=Math.random()*-1;
     this.rotate = 0;
     this.rotateSpeed=Math.random()*5;
     // this.img=imageList[Math.floor(Math.random()*imageList.length)];
@@ -248,8 +253,8 @@ function Organism(index){
     this.coverScreen  = function(){
         if(this.width < 1600){
 
-            this.height+=3;
-            this.width+=3;
+            this.height+=10;
+            this.width+=10;
             setTimeout(this.coverScreen, 100);
         } else {
             startPartTwo();
