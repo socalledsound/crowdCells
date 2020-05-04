@@ -3,7 +3,7 @@ let totalOrganisms = 300;
 let organismCount = 0;
 let organismMultiplier  = 5;
 let totalNumImages = 77;
-let totalNumSounds = 20;
+let totalNumSounds = 21;
 let touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
 
 
