@@ -48,7 +48,12 @@
             justify-content: center;
         
         }
-
+        input {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            }
+            
         .btn-start {
             -webkit-appearance: none;
             height:20vh;
