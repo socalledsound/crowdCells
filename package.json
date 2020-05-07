@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/socalledsound/crowdCells/issues"
   },
-  "homepage": "https://github.com/socalledsound/crowdCells#readme"
+  "homepage": "https://github.com/socalledsound/crowdCells#readme",
+  "devDependencies": {
+    "node-sass": "^4.14.1"
+  }
 }
