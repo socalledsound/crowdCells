@@ -6,17 +6,18 @@ let totalNumImages = 77;
 let totalNumSounds = 21;
 let arrowIsShowing = false;
 let touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
+// let touchEvent = 'ontouchstop' in window ? 'touchstop' : 'mouseOu';
 
+;
+// document.addEventListener('touchstart', this.touchstart);
+// document.addEventListener('touchmove', this.touchmove);
+// function touchstart(e) {
+//     e.preventDefault()
+// }
 
-document.addEventListener('touchstart', this.touchstart);
-document.addEventListener('touchmove', this.touchmove);
-function touchstart(e) {
-    e.preventDefault()
-}
-
-function touchmove(e) {
-    e.preventDefault()
-}
+// function touchmove(e) {
+//     e.preventDefault()
+// }
 
 async function preload(){
     document.querySelector('.btn-start').remove();
