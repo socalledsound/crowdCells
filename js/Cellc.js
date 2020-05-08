@@ -11,10 +11,10 @@ class Cellc {
         this.windowWidth = this.container.offsetWidth;
         this.windowHeight = this.container.offsetHeight;
         this.size = this.initSize;
-        this.targetSize = Math.random()*(this.windowWidth/4);
+        this.targetSize = Math.random()*(this.windowWidth/8);
         this.sizeDifferential = this.targetSize - this.size;
         this.xMin = this.windowWidth*.001;
-        this.yMin = this.windowHeight*.001 + 100;
+        this.yMin = this.windowHeight*.001 + this.marginTop;
         this.safety = this.windowWidth*.1;
         this.xMax = this.windowWidth - this.safety - this.targetSize/2;
         this.yMax = this.windowHeight - this.safety + this.yMin;
