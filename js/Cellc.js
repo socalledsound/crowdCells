@@ -28,9 +28,10 @@ class Cellc {
         this.rotate = 0;
         this.rotateSpeed=Math.random()*5;
         this.theta = 0;
+        this.opacity = 
         this.oscillatingOpacity = 0.1;
         this.img = 'white.jpg';
-        this.blurVal = Math.random()*10 + 2;
+        this.blurVal = Math.random()*10+1;
         this.clicked = false;
         this.mouseOver = false;
         this.makingBigger = true;
@@ -41,6 +42,7 @@ class Cellc {
         this.coverScreen = this.coverScreen.bind(this);
         this.makeBigger = this.makeBigger.bind(this);
         this.makeSmaller = this.makeSmaller.bind(this);
+        this.fadeOut = this.fadeOut.bind(this);
     }
 
     init(){
@@ -49,7 +51,7 @@ class Cellc {
         this.el.className = "organism";
         this.container = document.querySelector('.container');
         this.sibling = document.querySelector('.child');
-        this.container.insertBefore(this.el, this.sibling)
+        this.container.insertBefore(this.el, this.sibling);
         this.addEventListeners();
     }
 
@@ -121,13 +123,19 @@ class Cellc {
         this.el.style.top=`${this.y}px`;
         this.el.style.transform=`rotate(${this.rotate}deg)`;
         this.el.style.borderRadius="180px";
-        this.el.style.backgroundImage=`url('img/${this.img}')`
+        this.el.style.backgroundImage=`url('img/${this.img}')`;
+        this.el.style.opacity=`${this.opacity}`
         if(!this.mouseOver){
-            this.el.style.opacity = ".1";
+            this.opacity = .1;
             this.blur(); 
         } else {
-            this.el.style.opacity = ".6";
+            this.opacity = .6;
             this.unBlur();
+        }
+        if(this.completed){
+            this.el.style.zIndex = "-1";
+            this.fadeOut();
+            this.blur(); 
         }
     }
 
@@ -139,8 +147,19 @@ class Cellc {
         this.el.style.filter="blur(0px) brightness(80%)";
     }
 
-    makeBigger(){
-         
+    fadeOut(){
+        if(this.opacity > -1){
+            this.opacity-=0.005;
+            // this.sound.volume-=0.005;
+            setTimeout(this.fadeOut, 100);
+        } else {
+            // this.mouseOver=false;
+            this.opacity = 0;
+        }
+        
+    }
+
+    makeBigger(){   
         if(this.height < this.targetSize){
             this.height+=5;
             this.width+=5;
@@ -171,9 +190,7 @@ class Cellc {
             this.y-=this.height/100;
             this.x-=this.width/100;
             
-        } else {
-            this.blur();
-            this.el.style.zIndex = "-1";
+        } else {           
             this.completed = true;
         }
     }
