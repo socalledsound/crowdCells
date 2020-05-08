@@ -51,7 +51,7 @@ class Cellc {
         this.el.className = "organism";
         this.container = document.querySelector('.container');
         this.sibling = document.querySelector('.child');
-        this.container.insertBefore(this.el, this.sibling)
+        this.container.insertBefore(this.el, this.sibling);
         this.addEventListeners();
     }
 
