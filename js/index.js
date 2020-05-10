@@ -37,7 +37,7 @@ async function preload(){
 
 function init(){
 
-    let numcells = Math.floor(Math.random()*10) + 3;
+    let numcells = Math.floor(Math.random()*10) + 6;
     let stopLoop = cellCount + numcells;
     for(let i = cellCount; i < stopLoop; i++){
         
